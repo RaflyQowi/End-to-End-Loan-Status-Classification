@@ -1,1 +1,23 @@
-key: values
+COLUMNS:
+  Loan ID: object
+  Customer ID: object
+  Loan Status: object
+  Current Loan Amount: float64
+  Term: object
+  Credit Score: float64
+  Annual Income: float64
+  Years in current job: object
+  Home Ownership: object
+  Purpose: object
+  Monthly Debt: float64
+  Years of Credit History: float64
+  Months since last delinquent: float64
+  Number of Open Accounts: float64
+  Number of Credit Problems: float64
+  Current Credit Balance: float64
+  Maximum Open Credit: float64
+  Bankruptcies: float64
+  Tax Liens: float64
+
+TARGET_COLUMN:
+  name: Loan Status
