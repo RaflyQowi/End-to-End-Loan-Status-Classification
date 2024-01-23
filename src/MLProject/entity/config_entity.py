@@ -31,3 +31,13 @@ class ModelTrainerConfig:
     degree: int # Degree of the polynomial kernel function
     kernel: str # Kernel function {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} 
     target_column: str
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: str
+    test_data_path: str
+    model_path: str
+    all_params: dict
+    metric_file_path: Path
+    target_column: str
+    mlflow_uri: str

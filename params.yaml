@@ -1,4 +1,4 @@
 SVC:
-  C: 1.0 # Regularization parameter (default=1.0)
-  degree: 3 # Degree of the polynomial kernel function (default=3 and only for poly kernel)
-  kernel: "rbf" # Kernel function {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} (default=’rbf’)
+  C: 1 # Regularization parameter (default=1.0)
+  degree: 1 # Degree of the polynomial kernel function (default=3 and only for poly kernel)
+  kernel: "poly" # Kernel function {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} (default=’rbf’)
