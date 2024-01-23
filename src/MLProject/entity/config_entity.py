@@ -20,3 +20,14 @@ class DataValidationConfig:
 class DataTransformationConfig:
     root_dir: Path
     data_path: Path
+
+@dataclass(frozen= True)
+class ModelTrainerConfig:
+    root_dir: Path
+    train_data_path: Path
+    test_data_path: Path
+    model_name: str
+    C: float # Regularization parameter
+    degree: int # Degree of the polynomial kernel function
+    kernel: str # Kernel function {‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’} 
+    target_column: str

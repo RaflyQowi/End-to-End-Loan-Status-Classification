@@ -20,4 +20,4 @@ COLUMNS:
   Tax Liens: float64
 
 TARGET_COLUMN:
-  name: Loan Status
+  name: Loan_Status
