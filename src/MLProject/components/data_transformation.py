@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, RobustScaler
 from MLProject.utils.common import save_bin, load_bin
 from MLProject.entity.config_entity import DataTransformationConfig
+import yaml
 
 class DataTransformation:
     def __init__(self, config: DataTransformationConfig):
@@ -21,6 +22,19 @@ class DataTransformation:
         self.test_path = os.path.join(self.config.root_dir, "test.csv")
         self.sc_path = os.path.join(self.config.root_dir, "scaler.bin")
         self.le_path = os.path.join(self.config.root_dir, "label_encoders.bin")
+        self.drop_feature_columns = None
+
+    def get_column_info(self):
+        logger.info(f"Saving column info at: {os.path.join(self.config.root_dir, 'column_info.yaml')}")
+        data_dict = {
+            "categorical_features": self.categorical_features,
+            "numeric_features": self.numeric_features,
+            "identifier": self.identifier,
+            "drop_feature_columns": self.drop_feature_columns
+        }
+
+        with open(os.path.join(self.config.root_dir, "column_info.yaml"), 'w') as f:
+            yaml.dump(data_dict, f)
     
     def get_test_transormation(self):
         data = pd.read_csv(self.test_path)
@@ -75,11 +89,11 @@ class DataTransformation:
     def clean_null_values(self):
         logger.info(f"Null values cleaning started")
         logger.info(f"Null values before cleaning: {self.data.isnull().sum().sum()}| Shape: {self.data.shape}")
-        drop_feature_columns, drop_null_value_columns, imputation_columns = self._get_missing_values_strategies(self.data)
-        self.data.drop(drop_feature_columns, axis=1, inplace=True)
+        self.drop_feature_columns, drop_null_value_columns, imputation_columns = self._get_missing_values_strategies(self.data)
+        self.data.drop(self.drop_feature_columns, axis=1, inplace=True)
         self.data.dropna(subset=drop_null_value_columns, inplace=True)
-        self.numeric_features = [x for x in self.numeric_features if x not in drop_feature_columns]
-        self.categorical_features = [x for x in self.categorical_features if x not in drop_feature_columns]
+        self.numeric_features = [x for x in self.numeric_features if x not in self.drop_feature_columns]
+        self.categorical_features = [x for x in self.categorical_features if x not in self.drop_feature_columns]
         self.data = self._impute_missing_values(self.data, imputation_columns, self.categorical_features)
         logger.info(f"Null values cleaned")
         logger.info(f"Null values after cleaning: {self.data.isnull().sum().sum()}| Shape: {self.data.shape}")

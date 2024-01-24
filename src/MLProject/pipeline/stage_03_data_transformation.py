@@ -26,6 +26,7 @@ class DataTransformationTrainingPipeline:
             self.data_transformation.get_label_encoder()
             self.data_transformation.get_scaler()
             self.data_transformation.get_test_transormation()
+            self.data_transformation.get_column_info()
 
             logger.info(f"{'>>'*20} {STAGE_NAME} Completed {'<<'*20} \n\n")
         
