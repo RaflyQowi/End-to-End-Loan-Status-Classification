@@ -26,17 +26,17 @@ except Exception as e:
     logger.exception(e)
     raise e
 
-# try:
-#     obj = ModelTrainerTrainingPipeline()
-#     obj.main()
-# except Exception as e:
-#     logger.exception(e)
-#     raise e
+try:
+    obj = ModelTrainerTrainingPipeline()
+    obj.main()
+except Exception as e:
+    logger.exception(e)
+    raise e
 
-# try:
-#     obj = ModelEvaluationTrainingPipeline()
-#     obj.main()
-# except Exception as e:
-#     logger.exception(e)
-#     raise e
+try:
+    obj = ModelEvaluationTrainingPipeline()
+    obj.main()
+except Exception as e:
+    logger.exception(e)
+    raise e
     
