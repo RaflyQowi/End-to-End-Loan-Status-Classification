@@ -1,0 +1,22 @@
+name: Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Docker Hub
+        run: |
+          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+          docker build -t $DOCKERHUB_USERNAME/streamlit-app .
+          docker push $DOCKERHUB_USERNAME/end-to-end-loan-status-classification:tagname
