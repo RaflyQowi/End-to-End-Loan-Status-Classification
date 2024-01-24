@@ -8,15 +8,8 @@ WORKDIR /app
 COPY . /app
 
 # Update pip and install required packages
-RUN pip install --upgrade pip
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-# Set up a virtual environment
-RUN python -m venv /venv
-ENV PATH="/venv/bin:$PATH"
-
-# Install any needed packages specified in requirements.txt within the virtual environment
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 # Make port 8501 available to the world outside this container
 EXPOSE 8501
