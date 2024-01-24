@@ -17,6 +17,6 @@ jobs:
 
       - name: Deploy to Docker Hub
         run: |
-          echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
-          docker build -t $DOCKERHUB_USERNAME/streamlit-app .
-          docker push $DOCKERHUB_USERNAME/end-to-end-loan-status-classification:tagname
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/end-to-end-loan-status-classification:tagname .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/end-to-end-loan-status-classification:tagname
